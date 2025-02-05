@@ -12,14 +12,14 @@ Rails.application.routes.draw do
     root to: "home#index", as: :authenticated_root
   end
   
-  # Definir corretamente a rota root para usuários autenticados e não autenticados
+  # Define corretamente a rota root para usuários autenticados e não autenticados
   unauthenticated :user do
     as :user do
       root to: "devise/sessions#new", as: :unauthenticated_root
     end
   end
 
-  # Página de cadastro personalizada
+  # Página de cadastro 
   get "cadastro", to: "devise/registrations#new"
 
   # Produtos
