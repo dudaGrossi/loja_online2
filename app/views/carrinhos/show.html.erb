@@ -90,7 +90,7 @@
 
                             <%= form_with url: remover_carrinhos_path(item.produto.id), method: :delete do %>
                                 <button type="submit" class="btn btn-sm btn-outline-warning">
-                                    <i class="fas fa-trash-alt"></i> <!-- Ícone de lixeira -->
+                                    <i class="fas fa-trash-alt"></i>
                                 </button>
                             <% end %>                            
                         </div>
@@ -105,7 +105,7 @@
         </div>        
 
         <div class="d-flex justify-content-between mt-3">
-            <%= link_to "Continuar Comprando", root_path, class: "btn btn-outline-secondary" %>
+            <%= link_to "Continuar Comprando", user_signed_in? ? authenticated_root_path : unauthenticated_root_path, class: "btn btn-outline-secondary" %>
         </div>
     </div>
 

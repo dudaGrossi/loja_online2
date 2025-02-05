@@ -1,18 +1,25 @@
 Rails.application.routes.draw do
-  # Página inicial
-  root "home#index"
-
   # Devise cuida da autenticação (login, logout, cadastro, recuperação de senha)
-  devise_for :users, skip: [:sessions]
-
+  devise_for :users
+  
   devise_scope :user do
-    get "login", to: "devise/sessions#new"   # Sua tela personalizada
+    get "login", to: "devise/sessions#new"
     post "login", to: "devise/sessions#create"
     delete "logout", to: "devise/sessions#destroy"
   end
-  
 
-  # Cadastro de novos usuários (Se quiser uma tela personalizada para cadastro)
+  authenticated :user do
+    root to: "home#index", as: :authenticated_root
+  end
+  
+  # Definir corretamente a rota root para usuários autenticados e não autenticados
+  unauthenticated :user do
+    as :user do
+      root to: "devise/sessions#new", as: :unauthenticated_root
+    end
+  end
+
+  # Página de cadastro personalizada
   get "cadastro", to: "devise/registrations#new"
 
   # Produtos
